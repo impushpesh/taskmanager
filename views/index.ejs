@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="stylesheet/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="/create" method="post">
+        <input
+          type="text"
+          placeholder="Title"
+          name="title"
+          class="input-text"
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          class="input-text"
+        />
+        <input type="submit" value="Add Task" class="submit-button" />
+      </form>
+
+      <div class="task-list">
+        <% tasks.forEach(task => { %>
+        <div class="task">
+          <h3><%= task.title %></h3>
+          <p><%= task.description %></p>
+          <p class="created-at">
+            Created at: <%= task.createdAt.toDateString() %>
+          </p>
+          <form
+            action="/delete/<%= task._id %>"
+            method="POST"
+            class="task-form"
+          >
+            <button type="submit" class="delete-button">Delete</button>
+          </form>
+          <a href="/edit/<%= task._id %>" class="edit-button">Edit</a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
